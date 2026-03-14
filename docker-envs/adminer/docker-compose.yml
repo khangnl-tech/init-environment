@@ -1,0 +1,7 @@
+services:
+  adminer:
+    image: adminer:latest
+    container_name: dev-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"

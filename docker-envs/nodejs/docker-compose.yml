@@ -1,0 +1,15 @@
+services:
+  node:
+    image: node:latest
+    container_name: dev-node
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./app:/app
+    ports:
+      - "3000:3000"
+      - "5173:5173"
+      - "8080:8080"
+    command: bash
+

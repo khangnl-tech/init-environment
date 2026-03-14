@@ -1,0 +1,14 @@
+services:
+  python:
+    image: python:latest
+    container_name: dev-python
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./app:/app
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+    command: bash
+
