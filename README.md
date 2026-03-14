@@ -1,8 +1,6 @@
 # Docker Environments For Common Development Setups
 
-Bo thu muc nay gom nhieu moi truong Docker tach rieng. Moi thu muc chi chua 1 `docker-compose.yml` va moi file compose chi khoi tao 1 container chinh cho dung muc dich.
-
-Phu hop voi may Windows 10, AMD Ryzen 5 3400G, RAM 16GB. Cau hinh nay du de chay cac moi truong phat trien pho thong, nhung khong nen mo tat ca container cung luc neu khong can.
+Bo thu muc nay gom nhieu moi truong Docker tach rieng. Moi thu muc chi chua 1 `docker-compose.yml` va moi file compose chi khoi tao 1 container chinh cho dung muc dich.\
 
 ## Cau truc thu muc
 
@@ -37,6 +35,12 @@ cd docker-envs/mysql
 docker compose up -d
 ```
 
+Chay foreground de xem log truc tiep ngay trong PowerShell:
+
+```bash
+docker compose up
+```
+
 Tat moi truong:
 
 ```bash
@@ -48,6 +52,36 @@ Xem log:
 ```bash
 docker compose logs -f
 ```
+
+Xem log cua 1 service cu the:
+
+```bash
+docker compose logs -f php
+docker compose logs -f mysql
+docker compose logs -f postgres
+```
+
+Chay 1 lenh runtime va xem output truc tiep trong PowerShell:
+
+```bash
+docker compose run --rm php php artisan migrate
+docker compose run --rm php composer install
+docker compose run --rm --service-ports php php artisan serve --host=0.0.0.0 --port=8000
+```
+
+Neu container da dang chay va ban muon chay lenh ben trong no:
+
+```bash
+docker compose exec php php artisan route:list
+docker compose exec php php artisan migrate
+```
+
+Tom tat nhanh:
+- `docker compose up`: chay container foreground, xem log truc tiep
+- `docker compose up -d`: chay nen
+- `docker compose logs -f`: bam log truc tiep cua container dang chay
+- `docker compose run --rm ...`: chay 1 lenh va xem output ngay
+- `docker compose exec ...`: chay lenh trong container dang chay
 
 ## Cach mount source code tren Windows
 
@@ -239,15 +273,6 @@ Thuong di kem:
 - Java backend thong dung
 - Maven co san trong container
 
-## Goi y phan bo tai nguyen cho may cua ban
-
-Voi Windows 10, Ryzen 5 3400G, RAM 16GB:
-
-- Docker Desktop RAM: nen dat 6GB den 8GB
-- CPU: 4 core la hop ly
-- Khong nen chay dong thoi qua nhieu DB containers neu khong can
-- Khi dev, uu tien chi bat nhung container dang dung
-
 ## Cach chay tung moi truong
 
 ### MySQL
@@ -292,6 +317,18 @@ cd docker-envs/php-laravel
 docker compose run --rm php bash
 ```
 
+De xem runtime truc tiep trong PowerShell voi Laravel:
+
+```bash
+docker compose run --rm --service-ports php php artisan serve --host=0.0.0.0 --port=8000
+```
+
+De xem log container neu ban dang chay bang `up -d`:
+
+```bash
+docker compose logs -f php
+```
+
 ### Python / Flask
 
 ```bash
@@ -328,6 +365,12 @@ cd docker-envs/redis
 docker compose up -d
 ```
 
+Xem log truc tiep:
+
+```bash
+docker compose up
+```
+
 ### MongoDB
 
 ```bash
@@ -335,11 +378,23 @@ cd docker-envs/mongodb
 docker compose up -d
 ```
 
+Xem log truc tiep:
+
+```bash
+docker compose up
+```
+
 ### phpMyAdmin
 
 ```bash
 cd docker-envs/phpmyadmin
 docker compose up -d
+```
+
+Xem log truc tiep:
+
+```bash
+docker compose up
 ```
 
 Truy cap:
@@ -352,6 +407,12 @@ cd docker-envs/adminer
 docker compose up -d
 ```
 
+Xem log truc tiep:
+
+```bash
+docker compose up
+```
+
 Truy cap:
 - [http://localhost:8081](http://localhost:8081)
 
@@ -360,6 +421,12 @@ Truy cap:
 ```bash
 cd docker-envs/nginx
 docker compose up -d
+```
+
+Xem log truc tiep:
+
+```bash
+docker compose up
 ```
 
 Truy cap:
@@ -385,6 +452,25 @@ DB_PORT=3306
 DB_DATABASE=app
 DB_USERNAME=root
 DB_PASSWORD=12345678
+```
+
+Vi du chay va xem truc tiep tren PowerShell:
+
+```bash
+cd docker-envs/mysql
+docker compose up -d
+
+cd ../php-laravel
+docker compose run --rm php composer install
+docker compose run --rm php php artisan key:generate
+docker compose run --rm --service-ports php php artisan serve --host=0.0.0.0 --port=8000
+```
+
+Neu muon xem log MySQL truc tiep:
+
+```bash
+cd docker-envs/mysql
+docker compose logs -f mysql
 ```
 
 ### Laravel co PostgreSQL
