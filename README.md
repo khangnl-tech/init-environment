@@ -454,6 +454,13 @@ DB_USERNAME=root
 DB_PASSWORD=12345678
 ```
 
+Neu ban dang dung Docker Engine truc tiep trong WSL thay vi Docker Desktop, hay them vao container app hoac container giao dien DB:
+
+```yaml
+extra_hosts:
+  - "host.docker.internal:host-gateway"
+```
+
 Vi du chay va xem truc tiep tren PowerShell:
 
 ```bash
@@ -488,6 +495,13 @@ DB_USERNAME=postgres
 DB_PASSWORD=12345678
 ```
 
+Neu ban dang dung Docker Engine truc tiep trong WSL thay vi Docker Desktop, hay them vao container app hoac container giao dien DB:
+
+```yaml
+extra_hosts:
+  - "host.docker.internal:host-gateway"
+```
+
 ### Node.js co MongoDB
 
 Chay:
@@ -498,6 +512,13 @@ Connection string:
 
 ```text
 mongodb://root:12345678@host.docker.internal:27017
+```
+
+Neu ban dang dung Docker Engine truc tiep trong WSL thay vi Docker Desktop, hay them vao container app hoac container giao dien DB:
+
+```yaml
+extra_hosts:
+  - "host.docker.internal:host-gateway"
 ```
 
 ### Flask co PostgreSQL
@@ -529,3 +550,4 @@ Mount source vao:
 - Neu muon on dinh lau dai, sau nay ban nen khoa version cu the.
 - Mot so moi truong da doi host port de tranh trung cong khi mo nhieu container cung luc.
 - Tren Windows, neu code nam o o dia qua cham, hieu nang mount co the giam. Thu muc trong WSL2 thuong cho toc do tot hon.
+
